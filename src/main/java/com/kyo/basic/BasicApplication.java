@@ -3,6 +3,7 @@ package com.kyo.basic;
 import com.kyo.basic.config.listner.AppStartListner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.ApplicationPidFileWriter;
 
 /**
  * SpringBootApplication
@@ -21,12 +22,18 @@ public class BasicApplication {
     public static void main(String[] args) {
         //SpringApplication.run(BasicApplication.class, args);
         SpringApplication app = new SpringApplication(BasicApplication.class);
+        app.addListeners(new ApplicationPidFileWriter());
         app.addListeners(new AppStartListner());
         app.run(args);
 
         /**
          * SpringApplication의 여러 기능들을 입맛에 맞게 사용하고자 할 때는 아래와 같이 Spring Application 인스턴스를 생성해 실행하는 편이 좋다.
          *      SpringApplication app = new SpringApplication(BasicApplication.class);
+         *
+         *      // Spring Boot 백그라운드 jar 중지 (kill pid)
+         *      // 시작 : nohup java -jar demo.jar &
+         *      // 중지 : kill -9 `cat boot.pid`
+         *      app.addListeners(new ApplicationPidFileWriter());
          *
          *      // Application Context 생성 이전의 이벤트 리스너 등록
          *      app.addListeners(new AppListner());

@@ -4,6 +4,8 @@
 #
 
 spring:
+  pid:
+    file: boot.pid
   application:
     name: basic
   banner:
