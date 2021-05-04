@@ -1,5 +1,6 @@
-package com.kyo.basic.config.properties;
+package com.kyo.basic.config.base;
 
+import com.kyo.basic.config.properties.DaemonProp;
 import com.kyo.basic.process.vo.base.DaemonVo;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

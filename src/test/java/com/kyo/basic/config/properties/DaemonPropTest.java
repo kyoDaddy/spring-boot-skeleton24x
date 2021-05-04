@@ -1,4 +1,4 @@
-package com.kyo.basic.config;
+package com.kyo.basic.config.properties;
 
 import com.kyo.basic.config.properties.DaemonProp;
 import org.junit.jupiter.api.DisplayName;

@@ -1,4 +1,4 @@
-package com.kyo.basic.config.properties;
+package com.kyo.basic.config.base;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

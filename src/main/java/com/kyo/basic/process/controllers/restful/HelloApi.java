@@ -61,12 +61,6 @@ public class HelloApi {
         return this.helloService.getHello();
     }
 
-    @PostMapping("/user")
-    public ReqUserVo getUser(HttpServletRequest request, @RequestBody @Valid ReqUserVo user) {
-        StringBuffer log = (StringBuffer) request.getAttribute("logSb");
-        return user;
-    }
-
     @GetMapping("/download")
     public ResponseEntity<org.springframework.core.io.Resource> download() throws IOException {
         Path path = Paths.get("C:\\icon_new.gif");
