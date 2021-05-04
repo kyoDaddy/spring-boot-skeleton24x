@@ -4,11 +4,22 @@
 #
 
 spring:
+  pid:
+    file: boot.pid
   application:
     name: basic
   banner:
     charset: UTF-8
     location: classpath:/banner.txt
+  redis:
+    host: localhost
+    port: 6379
+  session:
+    timeout: 600
+    store-type: redis
+    redis:
+      flush-mode: on_save
+      namespace: spring:session
   config:
     import: classpath:daemon.yml, classpath:missing-on-profile.yml
   profiles:

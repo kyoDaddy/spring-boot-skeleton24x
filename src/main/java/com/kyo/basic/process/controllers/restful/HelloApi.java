@@ -6,11 +6,21 @@ import com.kyo.basic.process.vo.base.DaemonVo;
 import com.kyo.basic.process.vo.req.ReqUserVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  *
@@ -51,10 +61,20 @@ public class HelloApi {
         return this.helloService.getHello();
     }
 
-    @PostMapping("/user")
-    public ReqUserVo getUser(HttpServletRequest request, @RequestBody @Valid ReqUserVo user) {
-        StringBuffer log = (StringBuffer) request.getAttribute("logSb");
-        return user;
+    @GetMapping("/download")
+    public ResponseEntity<org.springframework.core.io.Resource> download() throws IOException {
+        Path path = Paths.get("C:\\icon_new.gif");
+        String contentType = Files.probeContentType(path);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentDisposition(ContentDisposition.builder("attachment")
+                .filename("icon_new.gif", StandardCharsets.UTF_8)
+                .build());
+        headers.add(HttpHeaders.CONTENT_TYPE, contentType);
+
+        org.springframework.core.io.Resource resource = new InputStreamResource(Files.newInputStream(path));
+        return new ResponseEntity<>(resource, headers, HttpStatus.OK);
     }
+
 
 }
