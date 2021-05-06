@@ -14,8 +14,6 @@ import javax.validation.constraints.NotNull;
 @ToString
 public class ReqUserVo {
 
-    private Long id;
-
     private String email;
 
     private String username;

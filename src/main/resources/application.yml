@@ -34,6 +34,8 @@ server:
   tomcat:
     uri-encoding: UTF-8
   port: 8080
+  shutdown:
+    grace-period: 5000
 
 logging:
   dir: /var/log/${spring.application.name}
