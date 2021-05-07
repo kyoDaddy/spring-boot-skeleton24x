@@ -1,6 +1,6 @@
 package com.kyo.basic;
 
-import com.kyo.basic.config.listner.AppStartListner;
+import com.kyo.basic.config.listner.AppStartListener;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.ApplicationPidFileWriter;
@@ -23,7 +23,7 @@ public class BasicApplication {
         //SpringApplication.run(BasicApplication.class, args);
         SpringApplication app = new SpringApplication(BasicApplication.class);
         app.addListeners(new ApplicationPidFileWriter());
-        app.addListeners(new AppStartListner());
+        app.addListeners(new AppStartListener());
         app.run(args);
 
         /**

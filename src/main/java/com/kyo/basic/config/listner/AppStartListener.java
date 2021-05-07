@@ -1,9 +1,9 @@
 package com.kyo.basic.config.listner;
 
-import org.springframework.boot.context.event.ApplicationStartedEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.event.ApplicationStartingEvent;
 import org.springframework.context.ApplicationListener;
-import org.springframework.stereotype.Component;
 
 /**
  * ApplicationEvent
@@ -12,11 +12,14 @@ import org.springframework.stereotype.Component;
  *      -Event 발생 기점 : Application Context 생성 (이전에 발생하는 이벤트는 Bean으로 등록해도 Listner가 동작을 안함)
  *      -직접 등록(Application Context 생성 이전의 이벤트 리스너 등록)한 경우에는 @Component 어노테이션 빼기
  */
-public class AppStartListner implements ApplicationListener<ApplicationStartingEvent> {
+public class AppStartListener implements ApplicationListener<ApplicationStartingEvent> {
+    protected final Logger log = LoggerFactory.getLogger(AppStartListener.class);
     @Override
     public void onApplicationEvent(ApplicationStartingEvent event) {
-        System.out.println("=============");
-        System.out.println("Application is Starting");
-        System.out.println("=============");
+        StringBuffer sb = new StringBuffer();
+        sb.append("\r\n=============\r\n");
+        sb.append("Application is Starting :)\r\n");
+        sb.append("=============\r\n");
+        log.info(sb.toString());
     }
 }
