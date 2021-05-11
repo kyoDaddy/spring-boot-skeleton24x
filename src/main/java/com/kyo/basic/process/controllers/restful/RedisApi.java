@@ -3,9 +3,7 @@ package com.kyo.basic.process.controllers.restful;
 import com.google.gson.Gson;
 import com.kyo.basic.process.vo.req.ReqUserVo;
 import com.kyo.basic.process.vo.res.ResUserVo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Set;
 
 @RestController
 @RequestMapping("redis")

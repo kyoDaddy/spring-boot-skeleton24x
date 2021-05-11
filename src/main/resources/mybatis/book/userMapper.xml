@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kyo.basic.process.mappers.book.userMapper">
+
+    <select id="selectUser" resultType="UserVo" parameterType="UserVo">
+    /*selectUser*/
+        SELECT
+             u.user_seq AS userSeq
+            ,u.email
+            ,u.username
+            ,u.role_type_cd AS roleTypeCd
+            ,u.password
+            ,u.reg_dtt AS regDtt
+            ,u.upt_dtt AS uptDtt
+            ,u.upt_user_seq AS uptUserSeq
+            ,u.password_reset AS passwordReset
+        FROM
+            book.`user` u
+
+        WHERE
+            1=1
+            <if test="@com.kyo.basic.process.utils.ParamUtils@notEmpty(userSeq)">
+            AND u.user_seq = #{userSeq}
+            </if>
+            <if test="@com.kyo.basic.process.utils.ParamUtils@notEmpty(email)">
+            AND u.email = #{email}
+            </if>
+
+        LIMIT
+            0, 1
+    </select>
+
+
+    <insert id="insertUser" parameterType="UserVo">
+    /*insertUser*/
+
+        INSERT INTO book.`user` (
+
+             email
+            ,username
+            ,role_type_cd
+            ,password
+            ,reg_dtt
+            ,upt_dtt
+            ,upt_user_seq
+
+        )
+        VALUES(
+
+             #{email}
+            ,#{username}
+            ,#{roleTypeCd}
+            ,#{password}
+            ,NOW()
+            ,NOW()
+            ,NULL
+
+        )
+
+    </insert>
+
+
+    <update id="updateUser" parameterType="UserVo">
+    /*updateUser*/
+
+        UPDATE
+            book.`user`
+
+        SET
+             upt_dtt = NOW()
+            <choose>
+            <when test="@com.kyo.basic.process.utils.ParamUtils@notEmpty(passwordReset)">
+            ,password_reset = #{passwordReset}
+            </when>
+            <otherwise>
+            ,password_reset = NULL
+            </otherwise>
+            </choose>
+            <if test="@com.kyo.basic.process.utils.ParamUtils@notEmpty(passwordReset)">
+            ,password = #{password}
+            </if>
+
+        WHERE
+            email = #{email}
+
+    </update>
+
+</mapper>
