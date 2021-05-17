@@ -3,20 +3,20 @@
 
 daemon:
   nick-name: daemon
-  root-uri: "http://www.naver.com"
+  root-uri: "http://locahost:8080"
 
 ---
 spring.config.activate.on-profile: daemon-local
 daemon:
   nick-name: Developer local
-  root-uri: http://local.naver.com
+  root-uri: "http://local.com:8080"
 
 
 ---
 spring.config.activate.on-profile: daemon-dev
 daemon:
   nick-name: Developer dev
-  root-uri: http://dev.naver.com
+  root-uri: "http://dev.com"
 
 
 ---
@@ -24,4 +24,4 @@ daemon:
 spring.config.activate.on-profile: daemon-live
 daemon:
   nick-name: Developer live
-  root-uri: http://live.naver.com
+  root-uri: "http://live.com"

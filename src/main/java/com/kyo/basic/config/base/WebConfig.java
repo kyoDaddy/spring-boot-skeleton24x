@@ -1,12 +1,14 @@
 package com.kyo.basic.config.base;
 
 import com.kyo.basic.config.interceptors.ControllerInterceptor;
+import com.kyo.basic.process.vo.base.DaemonVo;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * WebMvcConfigurer
@@ -22,6 +24,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @RequiredArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
 
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    /* bean 에서 가져오기 */
+    @Resource(name="daemon-config")
+    private DaemonVo daemonVo;
+
+    /* @RequiredArgsConstructor 통한 생성자 주입 */
     private final ControllerInterceptor interceptor;
 
     @Override
@@ -38,12 +47,20 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**")
-                .addResourceLocations("classpath:/static/")
-                .setCachePeriod(604800);
+        registry.addResourceHandler("/static/**", (daemonVo.getRootUri() + "/swagger-ui/**"))
+                .addResourceLocations("classpath:/static/", "classpath:/META-INF/resources/webjars/springfox-swagger-ui/")
+                .resourceChain(false);
+                //.setCachePeriod(604800);
                 /* 캐시제어 (Last-Modified 헤더를 보고 304 응답을 보냄)
                      세밀제어시 -> .setCacheControl(CacheControl.maxAge(7, TimeUnit.DAYS).cachePublic())
                 */
     }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController(daemonVo.getRootUri() + "/swagger-ui/")
+            .setViewName("forward:" + daemonVo.getRootUri() + "/swagger-ui/index.html");
+    }
+
 
 }
