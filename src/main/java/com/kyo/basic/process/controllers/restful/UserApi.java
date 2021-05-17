@@ -6,6 +6,7 @@ import com.kyo.basic.process.vo.base.SessionVo;
 import com.kyo.basic.process.vo.req.ReqUserVo;
 import com.kyo.basic.process.vo.res.ResUserVo;
 import com.kyo.basic.process.vo.table.book.UserVo;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,7 @@ public class UserApi {
     private SessionVo sessionVo;
 
 
+    @ApiOperation(value = "사용자 정보 획득", notes = "사용자 정보 획득을 위한 API로 id/key 헤더 입력 후 사용자 객체를 body에 담아 던지면 됨")
     @PostMapping("/")
     public ReqUserVo getUser(HttpServletRequest request, @RequestBody @Valid ReqUserVo user) {
         StringBuffer log = (StringBuffer) request.getAttribute("logSb");
@@ -41,7 +43,7 @@ public class UserApi {
         return user;
     }
 
-    @PostMapping("sign-in")
+    @PostMapping("/sign-in")
     public ResponseEntity<ResUserVo> signIn(HttpServletRequest request, @RequestBody @Valid ReqUserVo user) throws Exception {
         StringBuffer log = (StringBuffer) request.getAttribute("logSb");
 
@@ -55,7 +57,7 @@ public class UserApi {
         return new ResponseEntity<>(resVo, HttpStatus.OK);
     }
 
-    @GetMapping("session")
+    @GetMapping("/session")
     public String getSession() {
         return sessionVo.toString();
     }
