@@ -49,7 +49,7 @@ public class SwaggerConfig {
                 //.apis(RequestHandlerSelectors.any())
                 .apis(RequestHandlerSelectors.basePackage("com.kyo.basic.process.controllers.restful"))
                 //.paths(PathSelectors.any())
-                .paths(PathSelectors.ant("/user/**"))
+                .paths(PathSelectors.ant("/api/**"))
                 .build()
                 .pathMapping("/")
                 .directModelSubstitute(LocalDate.class, String.class)
