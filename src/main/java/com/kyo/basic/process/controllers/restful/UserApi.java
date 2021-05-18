@@ -1,5 +1,6 @@
 package com.kyo.basic.process.controllers.restful;
 
+import com.kyo.basic.process.constants.UrlConstatns;
 import com.kyo.basic.process.repository.book.UserRepository;
 import com.kyo.basic.process.repository.test.TestRepository;
 import com.kyo.basic.process.vo.base.SessionVo;
@@ -19,8 +20,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("user")
-public class UserApi {
+public class UserApi extends BaseController {
 
     @Autowired
     public UserRepository userRepository;
@@ -32,7 +32,7 @@ public class UserApi {
 
 
     @ApiOperation(value = "사용자 정보 획득", notes = "사용자 정보 획득을 위한 API로 id/key 헤더 입력 후 사용자 객체를 body에 담아 던지면 됨")
-    @PostMapping("/")
+    @PostMapping(UrlConstatns.API_USER)
     public ReqUserVo getUser(HttpServletRequest request, @RequestBody @Valid ReqUserVo user) {
         StringBuffer log = (StringBuffer) request.getAttribute("logSb");
 
@@ -43,7 +43,7 @@ public class UserApi {
         return user;
     }
 
-    @PostMapping("/sign-in")
+    @PostMapping(UrlConstatns.API_USER + "/sign-in")
     public ResponseEntity<ResUserVo> signIn(HttpServletRequest request, @RequestBody @Valid ReqUserVo user) throws Exception {
         StringBuffer log = (StringBuffer) request.getAttribute("logSb");
 
@@ -57,7 +57,7 @@ public class UserApi {
         return new ResponseEntity<>(resVo, HttpStatus.OK);
     }
 
-    @GetMapping("/session")
+    @GetMapping(UrlConstatns.API_USER + "/session")
     public String getSession() {
         return sessionVo.toString();
     }

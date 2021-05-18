@@ -29,7 +29,7 @@ public class UserApiTest extends AbstractControllerTest {
         jObj.addProperty("password", "123");
         jObj.addProperty("gender", "F");
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/user/")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/user")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(jObj.toString()))
