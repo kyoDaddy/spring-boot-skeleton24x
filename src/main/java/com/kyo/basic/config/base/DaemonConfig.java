@@ -19,7 +19,8 @@ public class DaemonConfig {
 
     /**
      * ConditionalOnMissingBean
-     * * 스프링 부트 프로젝트 상에서 같은 이름의 스프링 빈이 있을 때에는 그 스프링 빈을 사용하고, 만약 없다면 자동 등록한 빈을 쓰게끔 유도
+     *   - 스프링 부트 프로젝트 상에서 같은 이름의 스프링 빈이 있을 때에는 그 스프링 빈을 사용하고, 만약 없다면 자동 등록한 빈을 쓰게끔 유도
+     *   - bean 덮어쓰기 방지하기 component scan 후 autoconfiguration 으로 덮어쓰는 bean 방지
      */
     @Bean (name="daemon-config")
     @ConditionalOnMissingBean

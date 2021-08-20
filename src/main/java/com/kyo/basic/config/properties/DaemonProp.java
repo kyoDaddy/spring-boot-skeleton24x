@@ -1,9 +1,11 @@
 package com.kyo.basic.config.properties;
 
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConstructorBinding;
 
+import javax.annotation.PostConstruct;
 import java.time.Duration;
 
 /**
@@ -13,6 +15,7 @@ import java.time.Duration;
 */
 @ConfigurationProperties("daemon")
 @Getter
+@Slf4j
 public class DaemonProp {
 
     private String nickName;
@@ -22,6 +25,12 @@ public class DaemonProp {
     public DaemonProp(String nickName, String rootUri) {
         this.nickName = nickName;
         this.rootUri = rootUri;
+    }
+
+    @PostConstruct
+    public void setUp() {
+        log.info("nickName --> {}", nickName);
+        log.info("rootUri --> {}", rootUri);
     }
 
 }
