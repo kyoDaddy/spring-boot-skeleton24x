@@ -7,7 +7,7 @@ spring:
   pid:
     file: boot.pid
   application:
-    name: basic
+    name: spring-boot-skeleton24x
   banner:
     charset: UTF-8
     location: classpath:/banner.txt
