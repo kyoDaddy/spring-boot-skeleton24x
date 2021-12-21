@@ -48,7 +48,6 @@ spring boot skeleton code 작성하여, 초기 설정을 공부
          1. WebMvcConfigurer 설정
          2. Filter 설정
          3. interceptor 설정
-         4. 
     * test case
       1. spring-rest-docs test case (with junit5)
       2. custom utils test case
