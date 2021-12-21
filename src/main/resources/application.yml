@@ -2,33 +2,49 @@
 # classpath : 자바 가상머신이 실행할 때 class파일을 찾는데 그 때 기준이 되는 경로를 의미, spring에서는 이 classpath를 통해 필요한 resources를 가져와 사용한다.
 # 프로퍼티 우선 순위
 #
-
 spring:
   pid:
     file: boot.pid
   application:
     name: spring-boot-skeleton24x
-  banner:
-    charset: UTF-8
-    location: classpath:/banner.txt
+  config:
+    activate:
+      on-profile: local
+  cache:
+    cache-names: samples
+  # setting local embedded-redis
   redis:
     host: localhost
-    port: 6379
-  session:
-    timeout: 600
-    store-type: redis
-    redis:
-      flush-mode: on_save
-      namespace: spring:session
-  config:
-    import: classpath:daemon.yml, classpath:missing-on-profile.yml
-  profiles:
-    include:
-      - daemon
-    group:
-      local: daemon-local
-      dev: daemon-dev
-      live: daemon-live
+    port: 6480
+    timeout: 5000
+  # setting local embedded-h2
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+      path: /h2-console
+
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    open-in-view: false
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 
 server:
   tomcat:
@@ -37,102 +53,25 @@ server:
   shutdown:
     grace-period: 5000
 
+daemon:
+  nick-name: kyo local
+
 logging:
-  dir: /var/log/${spring.application.name}
+  config: classpath:logback-spring.xml
+  level:
+    root: INFO
+    com:
+      nexon:
+        sampleapi: INFO
+  file:
+    path: D:/logs/
 
-log:
-  trace:
-    file:
-      name: trace
-      path: ${logging.dir}
-  business:
-    file:
-      name: business
-      path: ${logging.dir}
 
-mybatis:
-  configuration:
-    map-underscore-to-camel-case: true
-  type-aliases-package: com.kyo.basic.process.vo
+# apply actuator health,metrics
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics
 
----
-app.name: local
-datasource:
-  book:
-    jdbc-url: jdbc:log4jdbc:mariadb://localhost:49168/book?characterEncoding=UTF-8&serverTimezone=UTC
-    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-    username: kyo
-    password: woduf8948!
-    connection-test-query: SELECT 1
-    initial-size: 10
-    max-active: 10
-    max-idle: 10
-    min-idle: 10
-    max-wait: 3000
-  test:
-    jdbc-url: jdbc:log4jdbc:mariadb://localhost:49168/test?characterEncoding=UTF-8&serverTimezone=UTC
-    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-    username: kyo
-    password: woduf8948!
-    connection-test-query: SELECT 1
-    initial-size: 10
-    max-active: 10
-    max-idle: 10
-    min-idle: 10
-    max-wait: 3000
 
----
-app.name: dev architecture spring-boot 2.4.x (by kyo)
-datasource:
-  book:
-    jdbc-url: jdbc:log4jdbc:mariadb://localhost:49168/book?characterEncoding=UTF-8&serverTimezone=UTC
-    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-    username: kyo
-    password: woduf8948!
-    connection-test-query: SELECT 1
-    initial-size: 10
-    max-active: 10
-    max-idle: 10
-    min-idle: 10
-    max-wait: 3000
-  test:
-    jdbc-url: jdbc:log4jdbc:mariadb://localhost:49168/test?characterEncoding=UTF-8&serverTimezone=UTC
-    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-    username: kyo
-    password: woduf8948!
-    connection-test-query: SELECT 1
-    initial-size: 10
-    max-active: 10
-    max-idle: 10
-    min-idle: 10
-    max-wait: 3000
-
----
-app.name: live architecture spring-boot 2.4.x (by kyo)
-datasource:
-  book:
-    jdbc-url: jdbc:log4jdbc:mariadb://localhost:49168/book?characterEncoding=UTF-8&serverTimezone=UTC
-    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-    username: kyo
-    password: woduf8948!
-    connection-test-query: SELECT 1
-    initial-size: 10
-    max-active: 10
-    max-idle: 10
-    min-idle: 10
-    max-wait: 3000
-  test:
-    jdbc-url: jdbc:log4jdbc:mariadb://localhost:49168/test?characterEncoding=UTF-8&serverTimezone=UTC
-    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-    username: kyo
-    password: woduf8948!
-    connection-test-query: SELECT 1
-    initial-size: 10
-    max-active: 10
-    max-idle: 10
-    min-idle: 10
-    max-wait: 3000
-
----
-### 프로파일 선언 없이 사용하는 상황이 벌어지지 않길 바란다!!
-app.name: Oh~ NO~~

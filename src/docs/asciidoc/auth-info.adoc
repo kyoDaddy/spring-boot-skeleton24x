@@ -1,0 +1,5 @@
+== 사용자 유효성 확인
+==== Example request
+include::{snippets}/auth/check/http-request.adoc[]
+==== Example response (정상)
+include::{snippets}/auth/check/http-response.adoc[]

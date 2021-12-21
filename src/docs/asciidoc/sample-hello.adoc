@@ -1,0 +1,5 @@
+== 안녕 조회 (무인증)
+==== Example request
+include::{snippets}/sample/hello/http-request.adoc[]
+==== Example response (정상)
+include::{snippets}/sample/hello/http-response.adoc[]

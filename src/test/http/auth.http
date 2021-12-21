@@ -1,0 +1,5 @@
+### Post Auth Info
+POST http://localhost:8080/auth/check
+Content-Type: application/json
+unique-key: 0000000000000001
+###

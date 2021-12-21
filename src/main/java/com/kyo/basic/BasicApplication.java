@@ -1,9 +1,10 @@
 package com.kyo.basic;
 
-import com.kyo.basic.config.listner.AppStartListener;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.ApplicationPidFileWriter;
+import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.cache.annotation.EnableCaching;
 
 /**
  * SpringBootApplication
@@ -13,18 +14,15 @@ import org.springframework.boot.context.ApplicationPidFileWriter;
  *      ComponentScan 에서 Bean 스캔해 등록
  *      등록된 정보를 바탕으로 jar 파일 내의 META-INF 중 spring.factories 안의 auto-configuration 클래스 목록들을 참조해서 자동 설정을 시작
  *        ConditionalOnMissingBean : 기존 그런 Bean이 없으면 자동설정으로 등록
- *
- *
  */
-@SpringBootApplication()
+
+@EnableCaching
+@ServletComponentScan
+@SpringBootApplication
 public class BasicApplication {
     /* 최상위 패키지부터 ComponentScan이 시작되어 차례대로 Bean에 등록이 되기 때문에 최상위 패키지에 위치시키는게 좋다 */
     public static void main(String[] args) {
-        //SpringApplication.run(BasicApplication.class, args);
-        SpringApplication app = new SpringApplication(BasicApplication.class);
-        app.addListeners(new ApplicationPidFileWriter());
-        app.addListeners(new AppStartListener());
-        app.run(args);
+        SpringApplication.run(BasicApplication.class, args);
 
         /**
          * SpringApplication의 여러 기능들을 입맛에 맞게 사용하고자 할 때는 아래와 같이 Spring Application 인스턴스를 생성해 실행하는 편이 좋다.

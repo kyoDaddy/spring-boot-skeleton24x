@@ -1,0 +1,5 @@
+== 메인 초기 정보 조회
+==== Example request
+include::{snippets}/main/init-data/http-request.adoc[]
+==== Example response (정상)
+include::{snippets}/main/init-data/http-response.adoc[]

@@ -1,0 +1,7 @@
+### Post Auth Info
+POST http://localhost:8080/main/init-data
+Content-Type: application/json
+unique-key: 0000000000000001
+
+'SkefhUkV8F+3ij9bQpqp/GJqoxeGigj+xxZRrW9JP/JfzmmgKzU/tjwh0lEqeeDBqa5AlEe+9jXHlwa6oKHnow=='
+###
