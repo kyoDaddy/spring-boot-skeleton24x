@@ -7,6 +7,9 @@ spring:
     file: boot.pid
   application:
     name: spring-boot-skeleton24x
+  banner:
+    charset: UTF-8
+    location: classpath:/banner.txt
   config:
     activate:
       on-profile: local
