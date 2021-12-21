@@ -31,14 +31,6 @@ spring boot skeleton code 작성하여, 초기 설정을 공부
     3. after build
        > ![after-build.PNG](desc/after-build.png)
 
-    4. etc
-       ````
-       setting inface console open-api spec
-       - build.gradle 내 openapi3 실행
-       - build/api-spec/openapi3.yaml 내용을 복사
-       - https://console.inface.nexon.com/api-gateway/197/modify# 로 내용 붙여넣기
-       ````
-
 
 ## 개발 적용 사항
 * spring-boot 2.4.11
