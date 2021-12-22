@@ -1,7 +1,5 @@
 # spring-boot-skeletons24x
-
-spring boot skeleton code 작성하여, 초기 설정을 공부
-1. 목적 : 초기 구성을 통한 타 프로젝트 동일 스펙 개발시 참고
+1. 목적 : spring boot skeleton code 작성하여, 초기 설정을 공부
 2. 참고 레퍼런스
     1. [Spring Boot에서 Spring Rest Docs 사용해보기](https://shinsunyoung.tistory.com/85)
     2. [Spring rest docs 적용기 (gradle 7.0.2)](https://velog.io/@max9106/Spring-Spring-rest-docs%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%AC%B8%EC%84%9C%ED%99%94)
@@ -27,7 +25,6 @@ spring boot skeleton code 작성하여, 초기 설정을 공부
        querydsl build 오류시
        - gradle cleanQuerySourceDir, initQuerySourcesDir 후 build 진행
        ````
-
     3. after build
        > ![after-build.PNG](desc/after-build.png)
 
