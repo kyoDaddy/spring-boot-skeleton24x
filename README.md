@@ -1,15 +1,5 @@
 # spring-boot-skeletons24x
-1. 목적 : spring boot skeleton code 작성하여, 초기 설정을 공부
-2. 참고 레퍼런스
-    1. [Spring Boot에서 Spring Rest Docs 사용해보기](https://shinsunyoung.tistory.com/85)
-    2. [Spring rest docs 적용기 (gradle 7.0.2)](https://velog.io/@max9106/Spring-Spring-rest-docs%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%AC%B8%EC%84%9C%ED%99%94)
-    3. [Spring WebClient 사용법1](https://umbum.dev/1114)
-    4. [Spring WebClient 사용법2](https://medium.com/@odysseymoon/spring-webclient-%EC%82%AC%EC%9A%A9%EB%B2%95-5f92d295edc0)
-    5. [AES, RSA](https://velog.io/@osmdark/JAVA%EC%95%94%EB%B3%B5%ED%98%B8%ED%99%94)
-    6. [Spring AES 암호화 전송하기](https://velog.io/@haerong22/HTTP-%EB%B0%94%EB%94%94-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%95%94%ED%98%B8%ED%99%94-%EC%A0%84%EC%86%A1%ED%95%98%EA%B8%B0)
-    7. [.http를 사용해 Postman 대체하기](https://jojoldu.tistory.com/266)
-    8. [Spring boot caffeine 캐시 적용](https://blog.yevgnenll.me/posts/spring-boot-with-caffeine-cache)
-
+spring boot skeleton code 작성하여, 초기 설정을 알아보자
 
 ## 로컬 환경 설정
 * intellij
@@ -58,3 +48,13 @@
     * restful sample api 개발
     * encrypytion sample 개발 
     
+
+## 참고 레퍼런스
+1. [Spring Boot에서 Spring Rest Docs 사용해보기](https://shinsunyoung.tistory.com/85)
+2. [Spring rest docs 적용기 (gradle 7.0.2)](https://velog.io/@max9106/Spring-Spring-rest-docs%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%AC%B8%EC%84%9C%ED%99%94)
+3. [Spring WebClient 사용법1](https://umbum.dev/1114)
+4. [Spring WebClient 사용법2](https://medium.com/@odysseymoon/spring-webclient-%EC%82%AC%EC%9A%A9%EB%B2%95-5f92d295edc0)
+5. [AES, RSA](https://velog.io/@osmdark/JAVA%EC%95%94%EB%B3%B5%ED%98%B8%ED%99%94)
+6. [Spring AES 암호화 전송하기](https://velog.io/@haerong22/HTTP-%EB%B0%94%EB%94%94-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%95%94%ED%98%B8%ED%99%94-%EC%A0%84%EC%86%A1%ED%95%98%EA%B8%B0)
+7. [.http를 사용해 Postman 대체하기](https://jojoldu.tistory.com/266)
+8. [Spring boot caffeine 캐시 적용](https://blog.yevgnenll.me/posts/spring-boot-with-caffeine-cache)

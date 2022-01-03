@@ -14,6 +14,7 @@ buildscript {
         mapstructBindingVersion = '0.2.0'
 
         logbackVersion = '0.1.5'
+        log4jVersion = '2.17.0'
 
         palantirDockerVersion = '0.21.0'
 
@@ -249,5 +250,13 @@ springBoot {
     }
 }
 
+configurations.all {
+    // 특정 의존성 버전 Override
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        if (details.requested.group == 'org.apache.logging.log4j') {
+            details.useVersion "${log4jVersion}"
+        }
+    }
+}
 
 
