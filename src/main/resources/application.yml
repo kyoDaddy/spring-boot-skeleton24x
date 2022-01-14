@@ -52,9 +52,18 @@ spring:
 server:
   tomcat:
     uri-encoding: UTF-8
+    threads:
+      max: 200
+    # 서버 연결 시간 제한 설정
+    connection-timeout: 5s
+    max-connections: 8194
   port: 8080
   shutdown:
     grace-period: 5000
+  # http 응답 압축 (응답 크키가 2048byte 보다 큰 경우에만 압축을 한다)
+  compression:
+    enabled: true
+    min-response-size: 2KB
 
 daemon:
   nick-name: kyo local
