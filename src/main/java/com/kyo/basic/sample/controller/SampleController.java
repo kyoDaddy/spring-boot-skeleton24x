@@ -30,6 +30,9 @@ public class SampleController {
      */
     @GetMapping("/samples")
     public CustomResponseEntity<List<String>> getSamples() {
+        log.info("info");
+        log.error("error");
+        log.debug("debug");
         return CustomResponseEntity.success(sampleService.getSamples());
     }
 

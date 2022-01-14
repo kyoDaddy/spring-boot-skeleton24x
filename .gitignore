@@ -7,7 +7,7 @@ build/
 
 ### ETC ###
 boot.pid
-D
+D/
 
 ### STS ###
 .apt_generated

@@ -46,12 +46,21 @@
         </rollingPolicy>
     </appender>
 
+    <!-- 로깅시 추가 액션을 위한 custom appender -->
+    <appender name="SAMPLE" class="com.kyo.basic.base.config.logback.SampleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <!-- Minimum logging level to be presented in the console logs-->
+            <level>ERROR</level>
+        </filter>
+    </appender>
+
     <!-- hikari log
     <logger name="com.zaxxer.hikari" level="DEBUG" /-->
 
-    <logger name="root" level="INFO" additivity="true">
+    <logger name="root" level="INFO" additivity="false">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="JSON_LOG" />
+        <appender-ref ref="SAMPLE"/>
     </logger>
 
 
