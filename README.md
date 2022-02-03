@@ -1,10 +1,13 @@
 # spring-boot-skeletons24x
 spring boot skeleton code 작성하여, 초기 설정을 알아보자
 
+## 암호화 방식
+![encryption-flow.png](desc/encryption-flow.png)
+
 ## 로컬 환경 설정
 * intellij
     1. before build (```SDK version : openjdk 11```)
-       > ![.extensions](desc/before-build.png)
+       > ![before-build.png](desc/before-build.png)
     2. build error
        ````
        터미널에서 build 오류시 - gradle invalid source release: 11
@@ -16,7 +19,7 @@ spring boot skeleton code 작성하여, 초기 설정을 알아보자
        - gradle cleanQuerySourceDir, initQuerySourcesDir 후 build 진행
        ````
     3. after build
-       > ![after-build.PNG](desc/after-build.png)
+       > ![after-build.png](desc/after-build.png)
 
 
 ## 개발 적용 사항
