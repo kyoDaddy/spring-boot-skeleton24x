@@ -18,6 +18,14 @@ spring boot skeleton code 작성하여, 초기 설정을 알아보자
        querydsl build 오류시
        - gradle cleanQuerySourceDir, initQuerySourcesDir 후 build 진행
        ````
+       ````
+       [intellij] java: warning: source release 11 requires target release 11 error
+        - Project Structure > Project Settings > Project
+            - Project SDK = 11
+            - Project language level = 11
+        - Project Structure > Platform Settings > SDKs
+            - SDKs = 11
+       ````
     3. after build
        > ![after-build.png](desc/after-build.png)
 

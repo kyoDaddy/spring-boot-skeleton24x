@@ -2,6 +2,7 @@ package com.kyo.basic.sample.repository.mapper;
 
 import com.kyo.basic.sample.repository.dto.AuthInfoDto;
 import com.kyo.basic.sample.repository.entity.AuthInfo;
+import com.kyo.basic.sample.repository.entity.RedisAuthInfo;
 import org.mapstruct.Mapper;
 
 /**
@@ -22,5 +23,22 @@ public interface AuthInfoMapper {
                 .build();
     }
 
+    default RedisAuthInfo authInfoToRedisAuthInfo(AuthInfo authInfo) {
+        return RedisAuthInfo.builder()
+                .id(authInfo.getMappingId())
+                .uniqueKey(authInfo.getUniqueKey())
+                .encKey(authInfo.getEncKey())
+                .encKeyUpdatedAt(authInfo.getEncKeyUpdatedAt())
+                .build();
+    }
+
+    default AuthInfo redisAuthInfoDtoToAuthInfo(RedisAuthInfo redisAuthInfo) {
+        return AuthInfo.builder()
+                .mappingId(redisAuthInfo.getId())
+                .uniqueKey(redisAuthInfo.getUniqueKey())
+                .encKey(redisAuthInfo.getEncKey())
+                .encKeyUpdatedAt(redisAuthInfo.getEncKeyUpdatedAt())
+                .build();
+    }
 
 }

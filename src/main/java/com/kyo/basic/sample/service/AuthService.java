@@ -4,6 +4,7 @@ import com.kyo.basic.base.enumeraion.Result;
 import com.kyo.basic.base.exceptiion.CustomException;
 import com.kyo.basic.base.utils.RandomByteUtils;
 import com.kyo.basic.sample.repository.AuthInfoRepository;
+import com.kyo.basic.sample.repository.RedisAuthInfoRepository;
 import com.kyo.basic.sample.repository.dto.AuthInfoDto;
 import com.kyo.basic.sample.repository.entity.AuthInfo;
 import com.kyo.basic.sample.repository.mapper.AuthInfoMapper;
@@ -22,6 +23,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class AuthService {
 
+    private final RedisAuthInfoRepository redisAuthInfoRepository;
     private final AuthInfoQueryDslRepository authInfoQueryDslRepository;
     private final AuthInfoRepository authInfoRepository;
     private final AuthInfoMapper authInfoMapper;
@@ -29,7 +31,7 @@ public class AuthService {
 
 
     /**
-     *  o header npsn 기준으로 db 조회
+     *  o header uniqueKey 기준으로 db 조회
      *  o 매핑값(uuid) 생성 후 DB 등록 완료
      *  o 암복호화 규칙
      *      > (key->randomByteHex(16자리), AES/CBC/PKCS5Padding 우선 AES256Utils 만들어둠)
@@ -41,6 +43,11 @@ public class AuthService {
                     // 호출 시 마다 암호화 키/수정일시 갱신
                     authInfo.setEncKey(RandomByteUtils.makeKey());
                     authInfo.setEncKeyUpdatedAt(LocalDateTime.now());
+                    // 사용자 정보 갱신
+                    // redis 갱신
+                    redisAuthInfoRepository.save(authInfoMapper.authInfoToRedisAuthInfo(authInfo));
+                    //log.info("authinfo mappingId {}, redis patch {}", authInfo.getMappingId(), save.getId());
+                    // mysql 갱신
                     return authInfoMapper.authInfoToAuthInfoDto(authInfoRepository.save(authInfo));
                 })
                 .orElseGet(() -> makeAuthInfo(uniqueKey));
@@ -53,18 +60,21 @@ public class AuthService {
         // encryption key 생성
         String encKey = RandomByteUtils.makeKey();
 
+        AuthInfo authInfo = AuthInfo.builder()
+                .uniqueKey(uniqueKey)
+                .mappingId(mappingId)
+                .encKey(encKey)
+                .encKeyUpdatedAt(LocalDateTime.now())
+                .build();
+
+        // redis 저장
+        redisAuthInfoRepository.save(authInfoMapper.authInfoToRedisAuthInfo(authInfo));
+        //log.info("authinfo mappingId {}, redis save {}", authInfo.getMappingId(), save.getId());
+        // mysql 저장
         return authInfoMapper.authInfoToAuthInfoDto(
-                authInfoRepository.save(
-                        AuthInfo.builder()
-                                .uniqueKey(uniqueKey)
-                                .mappingId(mappingId)
-                                .encKey(encKey)
-                                .encKeyUpdatedAt(LocalDateTime.now())
-                                .build()
-                )
+                authInfoRepository.save(authInfo)
         );
     }
-
 
     public AuthInfoDto getAuthInfo(String uniqueKey, String mappingId) {
         return Optional.ofNullable(authInfoQueryDslRepository.getAuthInfoByMappingId(mappingId))
@@ -74,7 +84,10 @@ public class AuthService {
     }
 
     public AuthInfo getAuthInfo(String uniqueKey) {
-        return authInfoRepository.getAuthInfoByUniqueKey(uniqueKey).orElse(null);
+        // redis 조회 후 db 조회
+        return redisAuthInfoRepository.findRedisAuthInfoByUniqueKey(uniqueKey)
+                .map(redisAuthInfo -> authInfoMapper.redisAuthInfoDtoToAuthInfo(redisAuthInfo))
+                .orElseGet(() -> authInfoRepository.getAuthInfoByUniqueKey(uniqueKey).orElse(null));
     }
 
 
